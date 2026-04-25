@@ -1,0 +1,495 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --accent-color: #f39c12;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #ecf0f1;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: var(--transition);
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 首页样式 */
+.main-header {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.cities-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.city-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition);
+    height: 400px;
+}
+
+.city-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.city-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.city-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.city-image.beijing {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Beijing%20Forbidden%20City%20Tiananmen%20Square%20ancient%20architecture%20landscape%20photography&image_size=landscape_4_3');
+}
+
+.city-image.xian {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Xian%20City%20Wall%20Terracotta%20Warriors%20ancient%20Chinese%20capital%20landscape&image_size=landscape_4_3');
+}
+
+.city-image.nanjing {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Nanjing%20Ming%20Xiaoling%20Tomb%20Purple%20Mountain%20ancient%20architecture%20landscape&image_size=landscape_4_3');
+}
+
+.city-image.luoyang {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Luoyang%20Longmen%20Grottoes%20ancient%20Chinese%20Buddhist%20caves%20landscape%20photography&image_size=landscape_4_3');
+}
+
+.city-image.hangzhou {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Hangzhou%20West%20Lake%20Leifeng%20Pagoda%20traditional%20Chinese%20garden%20landscape&image_size=landscape_4_3');
+}
+
+.city-image.kaifeng {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Kaifeng%20Dragon%20Pavilion%20Northern%20Song%20Dynasty%20ancient%20Chinese%20architecture&image_size=landscape_4_3');
+}
+
+.city-info {
+    padding: 20px;
+}
+
+.city-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.city-ancient-name {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.city-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.city-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44, 62, 80, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.city-card:hover .city-overlay {
+    opacity: 1;
+}
+
+.city-overlay span {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.city-card:hover .city-overlay span {
+    transform: scale(1.05);
+}
+
+/* 详情页样式 */
+.detail-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.back-button {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.back-button .arrow {
+    font-size: 1.2rem;
+}
+
+.city-header-info {
+    flex: 1;
+}
+
+.detail-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.detail-subtitle {
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+/* 时间线样式 */
+.timeline-section,
+.history-stories-section,
+.modern-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.timeline-container {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--secondary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+    padding-left: 30px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 0 3px var(--secondary-color);
+}
+
+.timeline-year {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.timeline-dynasty {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.timeline-name {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.timeline-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* 历史故事样式 */
+.stories-container {
+    display: grid;
+    gap: 25px;
+}
+
+.story-card {
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 4px solid var(--secondary-color);
+    transition: var(--transition);
+}
+
+.story-card:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+.story-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.story-meta {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.story-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* 现代发展样式 */
+.modern-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.modern-card {
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 25px;
+    transition: var(--transition);
+}
+
+.modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.modern-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modern-card-title::before {
+    content: '';
+    width: 8px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--secondary-color), var(--accent-color));
+    border-radius: 4px;
+}
+
+.modern-card-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .cities-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .city-card {
+        height: 350px;
+    }
+    
+    .detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    .detail-title {
+        font-size: 1.8rem;
+    }
+    
+    .timeline-section,
+    .history-stories-section,
+    .modern-section {
+        padding: 20px;
+    }
+    
+    .modern-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.city-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.city-card:nth-child(1) { animation-delay: 0.1s; }
+.city-card:nth-child(2) { animation-delay: 0.2s; }
+.city-card:nth-child(3) { animation-delay: 0.3s; }
+.city-card:nth-child(4) { animation-delay: 0.4s; }
+.city-card:nth-child(5) { animation-delay: 0.5s; }
+.city-card:nth-child(6) { animation-delay: 0.6s; }

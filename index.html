@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城市时光机 - 穿越历史的旅程</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- 首页：城市列表 -->
+        <div id="home-page" class="page active">
+            <header class="main-header">
+                <h1 class="title">城市时光机</h1>
+                <p class="subtitle">穿越千年历史，探索古城变迁</p>
+            </header>
+            
+            <div class="cities-container">
+                <div class="city-card" data-city="beijing">
+                    <div class="city-image beijing"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">北京</h2>
+                        <p class="city-ancient-name">古称：燕京、大都</p>
+                        <p class="city-desc">五朝古都，历史名城</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="xian">
+                    <div class="city-image xian"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">西安</h2>
+                        <p class="city-ancient-name">古称：长安、镐京</p>
+                        <p class="city-desc">十三朝古都，丝绸之路起点</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="nanjing">
+                    <div class="city-image nanjing"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">南京</h2>
+                        <p class="city-ancient-name">古称：金陵、建康</p>
+                        <p class="city-desc">六朝古都，十朝都会</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="luoyang">
+                    <div class="city-image luoyang"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">洛阳</h2>
+                        <p class="city-ancient-name">古称：洛邑、神都</p>
+                        <p class="city-desc">十三朝古都，华夏文明发祥地</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="hangzhou">
+                    <div class="city-image hangzhou"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">杭州</h2>
+                        <p class="city-ancient-name">古称：临安、钱塘</p>
+                        <p class="city-desc">南宋都城，人间天堂</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+                
+                <div class="city-card" data-city="kaifeng">
+                    <div class="city-image kaifeng"></div>
+                    <div class="city-info">
+                        <h2 class="city-name">开封</h2>
+                        <p class="city-ancient-name">古称：汴梁、汴京</p>
+                        <p class="city-desc">北宋都城，八朝古都</p>
+                    </div>
+                    <div class="city-overlay">
+                        <span>探索历史</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 城市详情页 -->
+        <div id="detail-page" class="page">
+            <header class="detail-header">
+                <button id="back-btn" class="back-button">
+                    <span class="arrow">←</span> 返回城市列表
+                </button>
+                <div class="city-header-info">
+                    <h1 id="detail-city-name" class="detail-title"></h1>
+                    <p id="detail-city-ancient" class="detail-subtitle"></p>
+                </div>
+            </header>
+            
+            <div class="detail-content">
+                <!-- 历史时间线 -->
+                <section class="timeline-section">
+                    <h2 class="section-title">历史沿革</h2>
+                    <div id="timeline-container" class="timeline-container">
+                        <!-- 时间线内容动态填充 -->
+                    </div>
+                </section>
+                
+                <!-- 历史故事 -->
+                <section class="history-stories-section">
+                    <h2 class="section-title">历史故事</h2>
+                    <div id="history-stories" class="stories-container">
+                        <!-- 历史故事动态填充 -->
+                    </div>
+                </section>
+                
+                <!-- 现代发展 -->
+                <section class="modern-section">
+                    <h2 class="section-title">现代发展</h2>
+                    <div id="modern-info" class="modern-container">
+                        <!-- 现代信息动态填充 -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
