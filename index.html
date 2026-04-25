@@ -15,6 +15,47 @@
                 <p class="subtitle">穿越千年历史，探索古城变迁</p>
             </header>
             
+            <!-- 筛选区域 -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">按地理位置：</span>
+                    <div class="filter-buttons" data-filter-type="region">
+                        <button class="filter-btn active" data-value="all">全部</button>
+                        <button class="filter-btn" data-value="北方">北方</button>
+                        <button class="filter-btn" data-value="南方">南方</button>
+                        <button class="filter-btn" data-value="华北">华北</button>
+                        <button class="filter-btn" data-value="西北">西北</button>
+                        <button class="filter-btn" data-value="华东">华东</button>
+                        <button class="filter-btn" data-value="华中">华中</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">按地形特征：</span>
+                    <div class="filter-buttons" data-filter-type="terrain">
+                        <button class="filter-btn active" data-value="all">全部</button>
+                        <button class="filter-btn" data-value="内陆">内陆</button>
+                        <button class="filter-btn" data-value="沿海">沿海</button>
+                        <button class="filter-btn" data-value="沿江">沿江</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">按历史地位：</span>
+                    <div class="filter-buttons" data-filter-type="historical">
+                        <button class="filter-btn active" data-value="all">全部</button>
+                        <button class="filter-btn" data-value="古都">古都</button>
+                        <button class="filter-btn" data-value="统一王朝都城">统一王朝都城</button>
+                    </div>
+                </div>
+                
+                <!-- 筛选结果统计 -->
+                <div class="filter-result">
+                    <span id="result-count">共找到 6 个城市</span>
+                    <button id="reset-filter" class="reset-btn">重置筛选</button>
+                </div>
+            </div>
+            
             <div class="cities-container">
                 <div class="city-card" data-city="beijing">
                     <div class="city-image beijing"></div>

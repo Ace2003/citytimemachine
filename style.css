@@ -69,6 +69,101 @@ body {
     font-weight: 400;
 }
 
+/* 筛选区域样式 */
+.filter-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.filter-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 100px;
+    padding-top: 8px;
+    flex-shrink: 0;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 2px solid var(--border-color);
+    background: white;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--light-bg);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), #34495e);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+/* 筛选结果区域 */
+.filter-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+#result-count {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.reset-btn {
+    padding: 8px 25px;
+    background: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reset-btn:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
 .cities-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -468,6 +563,36 @@ body {
     
     .modern-container {
         grid-template-columns: 1fr;
+    }
+    
+    /* 筛选组件响应式 */
+    .filter-section {
+        padding: 20px;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-label {
+        min-width: auto;
+        padding-top: 0;
+    }
+    
+    .filter-buttons {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 6px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .filter-result {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
     }
 }
 

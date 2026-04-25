@@ -3,6 +3,12 @@ const citiesData = {
     beijing: {
         name: "北京",
         ancientNames: "燕京、大都、蓟、幽州、北平",
+        categories: {
+            region: ["北方", "华北"],
+            terrain: ["内陆"],
+            historical: ["古都", "统一王朝都城"],
+            dynastyCount: 9
+        },
         timeline: [
             {
                 year: "公元前1045年",
@@ -108,6 +114,12 @@ const citiesData = {
     xian: {
         name: "西安",
         ancientNames: "长安、镐京、京兆、西京、大兴",
+        categories: {
+            region: ["北方", "西北"],
+            terrain: ["内陆"],
+            historical: ["古都", "统一王朝都城"],
+            dynastyCount: 13
+        },
         timeline: [
             {
                 year: "公元前1046年",
@@ -213,6 +225,12 @@ const citiesData = {
     nanjing: {
         name: "南京",
         ancientNames: "金陵、建康、建业、应天、天京",
+        categories: {
+            region: ["南方", "华东"],
+            terrain: ["沿江"],
+            historical: ["古都", "统一王朝都城"],
+            dynastyCount: 10
+        },
         timeline: [
             {
                 year: "公元前333年",
@@ -324,6 +342,12 @@ const citiesData = {
     luoyang: {
         name: "洛阳",
         ancientNames: "洛邑、成周、神都、东都、西京",
+        categories: {
+            region: ["北方", "华中"],
+            terrain: ["内陆"],
+            historical: ["古都", "统一王朝都城"],
+            dynastyCount: 13
+        },
         timeline: [
             {
                 year: "公元前1046年",
@@ -435,6 +459,12 @@ const citiesData = {
     hangzhou: {
         name: "杭州",
         ancientNames: "临安、钱塘、余杭、武林",
+        categories: {
+            region: ["南方", "华东"],
+            terrain: ["沿海", "沿江"],
+            historical: ["古都"],
+            dynastyCount: 2
+        },
         timeline: [
             {
                 year: "公元前222年",
@@ -546,6 +576,12 @@ const citiesData = {
     kaifeng: {
         name: "开封",
         ancientNames: "汴梁、汴京、汴州、大梁、东京",
+        categories: {
+            region: ["北方", "华中"],
+            terrain: ["内陆"],
+            historical: ["古都", "统一王朝都城"],
+            dynastyCount: 8
+        },
         timeline: [
             {
                 year: "公元前364年",
@@ -739,6 +775,91 @@ function renderModern(modern) {
     `).join('');
 }
 
+// 筛选状态
+let currentFilters = {
+    region: 'all',
+    terrain: 'all',
+    historical: 'all'
+};
+
+// DOM 元素（筛选相关）
+let filterButtons, resultCount, resetFilterBtn;
+
+// 检查城市是否符合筛选条件
+function matchFilter(cityKey, filterType, filterValue) {
+    if (filterValue === 'all') return true;
+    
+    const city = citiesData[cityKey];
+    if (!city || !city.categories) return false;
+    
+    const categories = city.categories;
+    
+    if (filterType === 'region' && categories.region) {
+        return categories.region.includes(filterValue);
+    }
+    if (filterType === 'terrain' && categories.terrain) {
+        return categories.terrain.includes(filterValue);
+    }
+    if (filterType === 'historical' && categories.historical) {
+        return categories.historical.includes(filterValue);
+    }
+    
+    return false;
+}
+
+// 应用筛选
+function applyFilters() {
+    let visibleCount = 0;
+    
+    cityCards.forEach(card => {
+        const cityKey = card.getAttribute('data-city');
+        let isVisible = true;
+        
+        // 检查所有筛选条件
+        for (const filterType in currentFilters) {
+            if (!matchFilter(cityKey, filterType, currentFilters[filterType])) {
+                isVisible = false;
+                break;
+            }
+        }
+        
+        // 显示/隐藏卡片
+        if (isVisible) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeInUp 0.6s ease forwards';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // 更新结果计数
+    if (resultCount) {
+        resultCount.textContent = `共找到 ${visibleCount} 个城市`;
+    }
+}
+
+// 重置筛选
+function resetAllFilters() {
+    currentFilters = {
+        region: 'all',
+        terrain: 'all',
+        historical: 'all'
+    };
+    
+    // 重置按钮状态
+    const allFilterBtns = document.querySelectorAll('.filter-btn');
+    allFilterBtns.forEach(btn => {
+        if (btn.getAttribute('data-value') === 'all') {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    applyFilters();
+}
+
 // 初始化函数
 function init() {
     // 获取DOM元素
@@ -751,8 +872,13 @@ function init() {
     historyStories = document.getElementById('history-stories');
     modernInfo = document.getElementById('modern-info');
     cityCards = document.querySelectorAll('.city-card');
+    
+    // 获取筛选相关DOM元素
+    filterButtons = document.querySelectorAll('.filter-btn');
+    resultCount = document.getElementById('result-count');
+    resetFilterBtn = document.getElementById('reset-filter');
 
-    // 事件监听
+    // 事件监听 - 城市卡片点击
     cityCards.forEach(card => {
         card.addEventListener('click', () => {
             const cityKey = card.getAttribute('data-city');
@@ -762,10 +888,38 @@ function init() {
         });
     });
 
+    // 事件监听 - 返回按钮
     backBtn.addEventListener('click', () => {
         showPage('home');
         window.scrollTo(0, 0);
     });
+    
+    // 事件监听 - 筛选按钮
+    if (filterButtons) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filterType = btn.parentElement.getAttribute('data-filter-type');
+                const filterValue = btn.getAttribute('data-value');
+                
+                // 更新同组按钮状态
+                const siblingBtns = btn.parentElement.querySelectorAll('.filter-btn');
+                siblingBtns.forEach(sb => sb.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // 更新筛选状态并应用
+                currentFilters[filterType] = filterValue;
+                applyFilters();
+            });
+        });
+    }
+    
+    // 事件监听 - 重置筛选按钮
+    if (resetFilterBtn) {
+        resetFilterBtn.addEventListener('click', resetAllFilters);
+    }
+    
+    // 初始化筛选
+    applyFilters();
 
     // 显示首页
     showPage('home');
