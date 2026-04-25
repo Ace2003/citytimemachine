@@ -227,6 +227,22 @@ body {
     background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Kaifeng%20Dragon%20Pavilion%20Northern%20Song%20Dynasty%20ancient%20Chinese%20architecture&image_size=landscape_4_3');
 }
 
+.city-image.taiyuan {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Taiyuan%20Jinci%20Temple%20ancient%20Chinese%20architecture%20Shanxi%20province%20landscape%20photography&image_size=landscape_4_3');
+}
+
+.city-image.datong {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Datong%20Yungang%20Grottoes%20Buddhist%20caves%20ancient%20Chinese%20art%20landscape%20photography&image_size=landscape_4_3');
+}
+
+.city-image.yinchuan {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Yinchuan%20Western%20Xia%20Mausoleums%20Helan%20Mountain%20landscape%20Ningxia%20province%20photography&image_size=landscape_4_3');
+}
+
+.city-image.chengdu {
+    background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Chengdu%20Dujiangyan%20irrigation%20system%20ancient%20Chinese%20engineering%20landscape%20photography&image_size=landscape_4_3');
+}
+
 .city-info {
     padding: 20px;
 }
